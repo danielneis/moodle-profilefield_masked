@@ -60,13 +60,12 @@ class profile_field_masked extends profile_field_base {
         $imgurl = $OUTPUT->image_url('whatsapp', 'profilefield_masked')->out(false);
         $img = html_writer::img($imgurl, get_string('wpalt', 'profilefield_masked'));
         if ($this->field->param2) {
-            if (strpos($this->data, '+') == 0) {
+            if (strpos($this->data, '+') === 0) {
                 $number = '+' . preg_replace('~\D~', '', $this->data);
             } else {
                 $number = '+55' . preg_replace('~\D~', '', $this->data);
             }
-            return $this->data . ' ' .
-                   html_writer::link('https://wa.me/' . $number, get_string('shareonwhatsapp', 'profilefield_masked', $img));
+            return html_writer::link('https://wa.me/' . $number, $img . ' ' . $this->data);
         } else {
             return parent::display_data();
         }
